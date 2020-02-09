@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbShoppingForumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tCategory">
+          <Key>
+            <PropertyRef Name="fCategoryID" />
+          </Key>
+          <Property Name="fCategoryID" Type="int" Nullable="false" />
+          <Property Name="fCategoryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tEfficacy">
+          <Key>
+            <PropertyRef Name="fEfficacyID" />
+          </Key>
+          <Property Name="fEfficacyID" Type="int" Nullable="false" />
+          <Property Name="fEfficacyName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tfeature">
+          <Key>
+            <PropertyRef Name="ffeatureID" />
+          </Key>
+          <Property Name="ffeatureID" Type="int" Nullable="false" />
+          <Property Name="ffeatureName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tNote">
+          <Key>
+            <PropertyRef Name="fNoteID" />
+          </Key>
+          <Property Name="fNoteID" Type="int" Nullable="false" />
+          <Property Name="fNoteName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tPart">
+          <Key>
+            <PropertyRef Name="fPartID" />
+          </Key>
+          <Property Name="fPartID" Type="int" Nullable="false" />
+          <Property Name="fPartName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tProdEfficacyRelation">
+          <Key>
+            <PropertyRef Name="fProductID" />
+            <PropertyRef Name="fEfficacyID" />
+          </Key>
+          <Property Name="fProductID" Type="int" Nullable="false" />
+          <Property Name="fEfficacyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="int" Nullable="false" />
+          <Property Name="fProductChName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fProductDesc" Type="nvarchar(max)" />
+          <Property Name="fUnitPrice" Type="int" />
+          <Property Name="fQuantityPerUnit" Type="nvarchar" MaxLength="50" />
+          <Property Name="fUnitsInStock" Type="int" />
+          <Property Name="fDiscontinued" Type="bit" />
+          <Property Name="fCategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tProductImage">
+          <Key>
+            <PropertyRef Name="fProductID" />
+            <PropertyRef Name="fProductImageId" />
+          </Key>
+          <Property Name="fProductID" Type="int" Nullable="false" />
+          <Property Name="fProductImageId" Type="int" Nullable="false" />
+          <Property Name="fProductImagePath" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tProductUnilateral">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="int" Nullable="false" />
+          <Property Name="fPartID" Type="int" />
+          <Property Name="fNoteID" Type="int" />
+          <Property Name="fOrigin" Type="nvarchar" MaxLength="20" />
+          <Property Name="fextraction" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tProductVegetableoil">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="int" Nullable="false" />
+          <Property Name="ffeatureID" Type="int" />
+        </EntityType>
+        <Association Name="FK_tProdEfficacyRelation_tEffcacy">
+          <End Role="tEfficacy" Type="Self.tEfficacy" Multiplicity="1" />
+          <End Role="tProdEfficacyRelation" Type="Self.tProdEfficacyRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEfficacy">
+              <PropertyRef Name="fEfficacyID" />
+            </Principal>
+            <Dependent Role="tProdEfficacyRelation">
+              <PropertyRef Name="fEfficacyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProdEfficacyRelation_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProdEfficacyRelation" Type="Self.tProdEfficacyRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProdEfficacyRelation">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProduct_tCategory">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="1" />
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="fCategoryID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="fCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductImage_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductImage" Type="Self.tProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductImage">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductUnilateral_tNote">
+          <End Role="tNote" Type="Self.tNote" Multiplicity="0..1" />
+          <End Role="tProductUnilateral" Type="Self.tProductUnilateral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNote">
+              <PropertyRef Name="fNoteID" />
+            </Principal>
+            <Dependent Role="tProductUnilateral">
+              <PropertyRef Name="fNoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductUnilateral_tPart">
+          <End Role="tPart" Type="Self.tPart" Multiplicity="0..1" />
+          <End Role="tProductUnilateral" Type="Self.tProductUnilateral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPart">
+              <PropertyRef Name="fPartID" />
+            </Principal>
+            <Dependent Role="tProductUnilateral">
+              <PropertyRef Name="fPartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductUnilateral_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductUnilateral" Type="Self.tProductUnilateral" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductUnilateral">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductVegetableoil_tfeature">
+          <End Role="tfeature" Type="Self.tfeature" Multiplicity="0..1" />
+          <End Role="tProductVegetableoil" Type="Self.tProductVegetableoil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tfeature">
+              <PropertyRef Name="ffeatureID" />
+            </Principal>
+            <Dependent Role="tProductVegetableoil">
+              <PropertyRef Name="ffeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductVegetableoil_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductVegetableoil" Type="Self.tProductVegetableoil" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductVegetableoil">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbShoppingForumModelStoreContainer">
+          <EntitySet Name="tCategory" EntityType="Self.tCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tEfficacy" EntityType="Self.tEfficacy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tfeature" EntityType="Self.tfeature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tNote" EntityType="Self.tNote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tPart" EntityType="Self.tPart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProdEfficacyRelation" EntityType="Self.tProdEfficacyRelation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProduct" EntityType="Self.tProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductImage" EntityType="Self.tProductImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductUnilateral" EntityType="Self.tProductUnilateral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductVegetableoil" EntityType="Self.tProductVegetableoil" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tProdEfficacyRelation_tEffcacy" Association="Self.FK_tProdEfficacyRelation_tEffcacy">
+            <End Role="tEfficacy" EntitySet="tEfficacy" />
+            <End Role="tProdEfficacyRelation" EntitySet="tProdEfficacyRelation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProdEfficacyRelation_tProduct" Association="Self.FK_tProdEfficacyRelation_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProdEfficacyRelation" EntitySet="tProdEfficacyRelation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProduct_tCategory" Association="Self.FK_tProduct_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductImage_tProduct" Association="Self.FK_tProductImage_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductImage" EntitySet="tProductImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductUnilateral_tNote" Association="Self.FK_tProductUnilateral_tNote">
+            <End Role="tNote" EntitySet="tNote" />
+            <End Role="tProductUnilateral" EntitySet="tProductUnilateral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductUnilateral_tPart" Association="Self.FK_tProductUnilateral_tPart">
+            <End Role="tPart" EntitySet="tPart" />
+            <End Role="tProductUnilateral" EntitySet="tProductUnilateral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductUnilateral_tProduct" Association="Self.FK_tProductUnilateral_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductUnilateral" EntitySet="tProductUnilateral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductVegetableoil_tfeature" Association="Self.FK_tProductVegetableoil_tfeature">
+            <End Role="tfeature" EntitySet="tfeature" />
+            <End Role="tProductVegetableoil" EntitySet="tProductVegetableoil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductVegetableoil_tProduct" Association="Self.FK_tProductVegetableoil_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductVegetableoil" EntitySet="tProductVegetableoil" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbShoppingForumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbShoppingForumEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tCategory" EntityType="dbShoppingForumModel.tCategory" />
+          <EntitySet Name="tEfficacy" EntityType="dbShoppingForumModel.tEfficacy" />
+          <EntitySet Name="tfeature" EntityType="dbShoppingForumModel.tfeature" />
+          <EntitySet Name="tNote" EntityType="dbShoppingForumModel.tNote" />
+          <EntitySet Name="tPart" EntityType="dbShoppingForumModel.tPart" />
+          <EntitySet Name="tProduct" EntityType="dbShoppingForumModel.tProduct" />
+          <EntitySet Name="tProductImage" EntityType="dbShoppingForumModel.tProductImage" />
+          <EntitySet Name="tProductUnilateral" EntityType="dbShoppingForumModel.tProductUnilateral" />
+          <EntitySet Name="tProductVegetableoil" EntityType="dbShoppingForumModel.tProductVegetableoil" />
+          <AssociationSet Name="FK_tProduct_tCategory" Association="dbShoppingForumModel.FK_tProduct_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductVegetableoil_tfeature" Association="dbShoppingForumModel.FK_tProductVegetableoil_tfeature">
+            <End Role="tfeature" EntitySet="tfeature" />
+            <End Role="tProductVegetableoil" EntitySet="tProductVegetableoil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductUnilateral_tNote" Association="dbShoppingForumModel.FK_tProductUnilateral_tNote">
+            <End Role="tNote" EntitySet="tNote" />
+            <End Role="tProductUnilateral" EntitySet="tProductUnilateral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductUnilateral_tPart" Association="dbShoppingForumModel.FK_tProductUnilateral_tPart">
+            <End Role="tPart" EntitySet="tPart" />
+            <End Role="tProductUnilateral" EntitySet="tProductUnilateral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductImage_tProduct" Association="dbShoppingForumModel.FK_tProductImage_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductImage" EntitySet="tProductImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductUnilateral_tProduct" Association="dbShoppingForumModel.FK_tProductUnilateral_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductUnilateral" EntitySet="tProductUnilateral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductVegetableoil_tProduct" Association="dbShoppingForumModel.FK_tProductVegetableoil_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductVegetableoil" EntitySet="tProductVegetableoil" />
+          </AssociationSet>
+          <AssociationSet Name="tProdEfficacyRelation" Association="dbShoppingForumModel.tProdEfficacyRelation">
+            <End Role="tEfficacy" EntitySet="tEfficacy" />
+            <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tCategory">
+          <Key>
+            <PropertyRef Name="fCategoryID" />
+          </Key>
+          <Property Name="fCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="fCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProduct" Relationship="dbShoppingForumModel.FK_tProduct_tCategory" FromRole="tCategory" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tEfficacy">
+          <Key>
+            <PropertyRef Name="fEfficacyID" />
+          </Key>
+          <Property Name="fEfficacyID" Type="Int32" Nullable="false" />
+          <Property Name="fEfficacyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProduct" Relationship="dbShoppingForumModel.tProdEfficacyRelation" FromRole="tEfficacy" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tfeature">
+          <Key>
+            <PropertyRef Name="ffeatureID" />
+          </Key>
+          <Property Name="ffeatureID" Type="Int32" Nullable="false" />
+          <Property Name="ffeatureName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProductVegetableoil" Relationship="dbShoppingForumModel.FK_tProductVegetableoil_tfeature" FromRole="tfeature" ToRole="tProductVegetableoil" />
+        </EntityType>
+        <EntityType Name="tNote">
+          <Key>
+            <PropertyRef Name="fNoteID" />
+          </Key>
+          <Property Name="fNoteID" Type="Int32" Nullable="false" />
+          <Property Name="fNoteName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProductUnilateral" Relationship="dbShoppingForumModel.FK_tProductUnilateral_tNote" FromRole="tNote" ToRole="tProductUnilateral" />
+        </EntityType>
+        <EntityType Name="tPart">
+          <Key>
+            <PropertyRef Name="fPartID" />
+          </Key>
+          <Property Name="fPartID" Type="Int32" Nullable="false" />
+          <Property Name="fPartName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProductUnilateral" Relationship="dbShoppingForumModel.FK_tProductUnilateral_tPart" FromRole="tPart" ToRole="tProductUnilateral" />
+        </EntityType>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="Int32" Nullable="false" />
+          <Property Name="fProductChName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fProductDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fUnitPrice" Type="Int32" />
+          <Property Name="fQuantityPerUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fUnitsInStock" Type="Int32" />
+          <Property Name="fDiscontinued" Type="Boolean" />
+          <Property Name="fCategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tCategory" Relationship="dbShoppingForumModel.FK_tProduct_tCategory" FromRole="tProduct" ToRole="tCategory" />
+          <NavigationProperty Name="tProductImage" Relationship="dbShoppingForumModel.FK_tProductImage_tProduct" FromRole="tProduct" ToRole="tProductImage" />
+          <NavigationProperty Name="tProductUnilateral" Relationship="dbShoppingForumModel.FK_tProductUnilateral_tProduct" FromRole="tProduct" ToRole="tProductUnilateral" />
+          <NavigationProperty Name="tProductVegetableoil" Relationship="dbShoppingForumModel.FK_tProductVegetableoil_tProduct" FromRole="tProduct" ToRole="tProductVegetableoil" />
+          <NavigationProperty Name="tEfficacy" Relationship="dbShoppingForumModel.tProdEfficacyRelation" FromRole="tProduct" ToRole="tEfficacy" />
+        </EntityType>
+        <EntityType Name="tProductImage">
+          <Key>
+            <PropertyRef Name="fProductID" />
+            <PropertyRef Name="fProductImageId" />
+          </Key>
+          <Property Name="fProductID" Type="Int32" Nullable="false" />
+          <Property Name="fProductImageId" Type="Int32" Nullable="false" />
+          <Property Name="fProductImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProduct" Relationship="dbShoppingForumModel.FK_tProductImage_tProduct" FromRole="tProductImage" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tProductUnilateral">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="Int32" Nullable="false" />
+          <Property Name="fPartID" Type="Int32" />
+          <Property Name="fNoteID" Type="Int32" />
+          <Property Name="fOrigin" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fextraction" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tNote" Relationship="dbShoppingForumModel.FK_tProductUnilateral_tNote" FromRole="tProductUnilateral" ToRole="tNote" />
+          <NavigationProperty Name="tPart" Relationship="dbShoppingForumModel.FK_tProductUnilateral_tPart" FromRole="tProductUnilateral" ToRole="tPart" />
+          <NavigationProperty Name="tProduct" Relationship="dbShoppingForumModel.FK_tProductUnilateral_tProduct" FromRole="tProductUnilateral" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tProductVegetableoil">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="Int32" Nullable="false" />
+          <Property Name="ffeatureID" Type="Int32" />
+          <NavigationProperty Name="tfeature" Relationship="dbShoppingForumModel.FK_tProductVegetableoil_tfeature" FromRole="tProductVegetableoil" ToRole="tfeature" />
+          <NavigationProperty Name="tProduct" Relationship="dbShoppingForumModel.FK_tProductVegetableoil_tProduct" FromRole="tProductVegetableoil" ToRole="tProduct" />
+        </EntityType>
+        <Association Name="FK_tProduct_tCategory">
+          <End Type="dbShoppingForumModel.tCategory" Role="tCategory" Multiplicity="1" />
+          <End Type="dbShoppingForumModel.tProduct" Role="tProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="fCategoryID" />
+            </Principal>
+            <Dependent Role="tProduct">
+              <PropertyRef Name="fCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductVegetableoil_tfeature">
+          <End Type="dbShoppingForumModel.tfeature" Role="tfeature" Multiplicity="0..1" />
+          <End Type="dbShoppingForumModel.tProductVegetableoil" Role="tProductVegetableoil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tfeature">
+              <PropertyRef Name="ffeatureID" />
+            </Principal>
+            <Dependent Role="tProductVegetableoil">
+              <PropertyRef Name="ffeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductUnilateral_tNote">
+          <End Type="dbShoppingForumModel.tNote" Role="tNote" Multiplicity="0..1" />
+          <End Type="dbShoppingForumModel.tProductUnilateral" Role="tProductUnilateral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNote">
+              <PropertyRef Name="fNoteID" />
+            </Principal>
+            <Dependent Role="tProductUnilateral">
+              <PropertyRef Name="fNoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductUnilateral_tPart">
+          <End Type="dbShoppingForumModel.tPart" Role="tPart" Multiplicity="0..1" />
+          <End Type="dbShoppingForumModel.tProductUnilateral" Role="tProductUnilateral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPart">
+              <PropertyRef Name="fPartID" />
+            </Principal>
+            <Dependent Role="tProductUnilateral">
+              <PropertyRef Name="fPartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductImage_tProduct">
+          <End Type="dbShoppingForumModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="dbShoppingForumModel.tProductImage" Role="tProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductImage">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductUnilateral_tProduct">
+          <End Type="dbShoppingForumModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="dbShoppingForumModel.tProductUnilateral" Role="tProductUnilateral" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductUnilateral">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductVegetableoil_tProduct">
+          <End Type="dbShoppingForumModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="dbShoppingForumModel.tProductVegetableoil" Role="tProductVegetableoil" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductVegetableoil">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tProdEfficacyRelation">
+          <End Type="dbShoppingForumModel.tEfficacy" Role="tEfficacy" Multiplicity="*" />
+          <End Type="dbShoppingForumModel.tProduct" Role="tProduct" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbShoppingForumModelStoreContainer" CdmEntityContainer="dbShoppingForumEntities">
+          <EntitySetMapping Name="tCategory">
+            <EntityTypeMapping TypeName="dbShoppingForumModel.tCategory">
+              <MappingFragment StoreEntitySet="tCategory">
+                <ScalarProperty Name="fCategoryName" ColumnName="fCategoryName" />
+                <ScalarProperty Name="fCategoryID" ColumnName="fCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEfficacy">
+            <EntityTypeMapping TypeName="dbShoppingForumModel.tEfficacy">
+              <MappingFragment StoreEntitySet="tEfficacy">
+                <ScalarProperty Name="fEfficacyName" ColumnName="fEfficacyName" />
+                <ScalarProperty Name="fEfficacyID" ColumnName="fEfficacyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tfeature">
+            <EntityTypeMapping TypeName="dbShoppingForumModel.tfeature">
+              <MappingFragment StoreEntitySet="tfeature">
+                <ScalarProperty Name="ffeatureName" ColumnName="ffeatureName" />
+                <ScalarProperty Name="ffeatureID" ColumnName="ffeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNote">
+            <EntityTypeMapping TypeName="dbShoppingForumModel.tNote">
+              <MappingFragment StoreEntitySet="tNote">
+                <ScalarProperty Name="fNoteName" ColumnName="fNoteName" />
+                <ScalarProperty Name="fNoteID" ColumnName="fNoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tPart">
+            <EntityTypeMapping TypeName="dbShoppingForumModel.tPart">
+              <MappingFragment StoreEntitySet="tPart">
+                <ScalarProperty Name="fPartName" ColumnName="fPartName" />
+                <ScalarProperty Name="fPartID" ColumnName="fPartID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProduct">
+            <EntityTypeMapping TypeName="dbShoppingForumModel.tProduct">
+              <MappingFragment StoreEntitySet="tProduct">
+                <ScalarProperty Name="fCategoryID" ColumnName="fCategoryID" />
+                <ScalarProperty Name="fDiscontinued" ColumnName="fDiscontinued" />
+                <ScalarProperty Name="fUnitsInStock" ColumnName="fUnitsInStock" />
+                <ScalarProperty Name="fQuantityPerUnit" ColumnName="fQuantityPerUnit" />
+                <ScalarProperty Name="fUnitPrice" ColumnName="fUnitPrice" />
+                <ScalarProperty Name="fProductDesc" ColumnName="fProductDesc" />
+                <ScalarProperty Name="fProductChName" ColumnName="fProductChName" />
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductImage">
+            <EntityTypeMapping TypeName="dbShoppingForumModel.tProductImage">
+              <MappingFragment StoreEntitySet="tProductImage">
+                <ScalarProperty Name="fProductImagePath" ColumnName="fProductImagePath" />
+                <ScalarProperty Name="fProductImageId" ColumnName="fProductImageId" />
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductUnilateral">
+            <EntityTypeMapping TypeName="dbShoppingForumModel.tProductUnilateral">
+              <MappingFragment StoreEntitySet="tProductUnilateral">
+                <ScalarProperty Name="fextraction" ColumnName="fextraction" />
+                <ScalarProperty Name="fOrigin" ColumnName="fOrigin" />
+                <ScalarProperty Name="fNoteID" ColumnName="fNoteID" />
+                <ScalarProperty Name="fPartID" ColumnName="fPartID" />
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductVegetableoil">
+            <EntityTypeMapping TypeName="dbShoppingForumModel.tProductVegetableoil">
+              <MappingFragment StoreEntitySet="tProductVegetableoil">
+                <ScalarProperty Name="ffeatureID" ColumnName="ffeatureID" />
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tProdEfficacyRelation" TypeName="dbShoppingForumModel.tProdEfficacyRelation" StoreEntitySet="tProdEfficacyRelation">
+            <EndProperty Name="tProduct">
+              <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+            </EndProperty>
+            <EndProperty Name="tEfficacy">
+              <ScalarProperty Name="fEfficacyID" ColumnName="fEfficacyID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

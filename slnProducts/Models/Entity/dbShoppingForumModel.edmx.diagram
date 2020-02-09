@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dce419ba68564918913fa6978aff2cb4" Name="Diagram1">
+        <EntityTypeShape EntityType="dbShoppingForumModel.tCategory" Width="1.5" PointX="0.5" PointY="1.5" />
+        <EntityTypeShape EntityType="dbShoppingForumModel.tEfficacy" Width="1.5" PointX="5" PointY="7.25" />
+        <EntityTypeShape EntityType="dbShoppingForumModel.tfeature" Width="1.5" PointX="7.75" PointY="3.625" />
+        <EntityTypeShape EntityType="dbShoppingForumModel.tNote" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="dbShoppingForumModel.tPart" Width="1.5" PointX="7.75" PointY="1.5" />
+        <EntityTypeShape EntityType="dbShoppingForumModel.tProduct" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="dbShoppingForumModel.tProductImage" Width="1.5" PointX="0.5" PointY="5.875" />
+        <EntityTypeShape EntityType="dbShoppingForumModel.tProductUnilateral" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="dbShoppingForumModel.tProductVegetableoil" Width="1.5" PointX="5.25" PointY="4.625" />
+        <AssociationConnector Association="dbShoppingForumModel.FK_tProduct_tCategory" />
+        <AssociationConnector Association="dbShoppingForumModel.FK_tProductVegetableoil_tfeature" />
+        <AssociationConnector Association="dbShoppingForumModel.FK_tProductUnilateral_tNote" />
+        <AssociationConnector Association="dbShoppingForumModel.FK_tProductUnilateral_tPart" />
+        <AssociationConnector Association="dbShoppingForumModel.FK_tProductImage_tProduct" />
+        <AssociationConnector Association="dbShoppingForumModel.FK_tProductUnilateral_tProduct" />
+        <AssociationConnector Association="dbShoppingForumModel.FK_tProductVegetableoil_tProduct" />
+        <AssociationConnector Association="dbShoppingForumModel.tProdEfficacyRelation" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

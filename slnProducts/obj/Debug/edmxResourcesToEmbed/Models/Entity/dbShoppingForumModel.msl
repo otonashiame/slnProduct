@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbShoppingForumModelStoreContainer" CdmEntityContainer="dbShoppingForumEntities">
+    <EntitySetMapping Name="tCategory">
+      <EntityTypeMapping TypeName="dbShoppingForumModel.tCategory">
+        <MappingFragment StoreEntitySet="tCategory">
+          <ScalarProperty Name="fCategoryName" ColumnName="fCategoryName" />
+          <ScalarProperty Name="fCategoryID" ColumnName="fCategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tEfficacy">
+      <EntityTypeMapping TypeName="dbShoppingForumModel.tEfficacy">
+        <MappingFragment StoreEntitySet="tEfficacy">
+          <ScalarProperty Name="fEfficacyName" ColumnName="fEfficacyName" />
+          <ScalarProperty Name="fEfficacyID" ColumnName="fEfficacyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tfeature">
+      <EntityTypeMapping TypeName="dbShoppingForumModel.tfeature">
+        <MappingFragment StoreEntitySet="tfeature">
+          <ScalarProperty Name="ffeatureName" ColumnName="ffeatureName" />
+          <ScalarProperty Name="ffeatureID" ColumnName="ffeatureID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tNote">
+      <EntityTypeMapping TypeName="dbShoppingForumModel.tNote">
+        <MappingFragment StoreEntitySet="tNote">
+          <ScalarProperty Name="fNoteName" ColumnName="fNoteName" />
+          <ScalarProperty Name="fNoteID" ColumnName="fNoteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tPart">
+      <EntityTypeMapping TypeName="dbShoppingForumModel.tPart">
+        <MappingFragment StoreEntitySet="tPart">
+          <ScalarProperty Name="fPartName" ColumnName="fPartName" />
+          <ScalarProperty Name="fPartID" ColumnName="fPartID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tProduct">
+      <EntityTypeMapping TypeName="dbShoppingForumModel.tProduct">
+        <MappingFragment StoreEntitySet="tProduct">
+          <ScalarProperty Name="fCategoryID" ColumnName="fCategoryID" />
+          <ScalarProperty Name="fDiscontinued" ColumnName="fDiscontinued" />
+          <ScalarProperty Name="fUnitsInStock" ColumnName="fUnitsInStock" />
+          <ScalarProperty Name="fQuantityPerUnit" ColumnName="fQuantityPerUnit" />
+          <ScalarProperty Name="fUnitPrice" ColumnName="fUnitPrice" />
+          <ScalarProperty Name="fProductDesc" ColumnName="fProductDesc" />
+          <ScalarProperty Name="fProductChName" ColumnName="fProductChName" />
+          <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tProductImage">
+      <EntityTypeMapping TypeName="dbShoppingForumModel.tProductImage">
+        <MappingFragment StoreEntitySet="tProductImage">
+          <ScalarProperty Name="fProductImagePath" ColumnName="fProductImagePath" />
+          <ScalarProperty Name="fProductImageId" ColumnName="fProductImageId" />
+          <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tProductUnilateral">
+      <EntityTypeMapping TypeName="dbShoppingForumModel.tProductUnilateral">
+        <MappingFragment StoreEntitySet="tProductUnilateral">
+          <ScalarProperty Name="fextraction" ColumnName="fextraction" />
+          <ScalarProperty Name="fOrigin" ColumnName="fOrigin" />
+          <ScalarProperty Name="fNoteID" ColumnName="fNoteID" />
+          <ScalarProperty Name="fPartID" ColumnName="fPartID" />
+          <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tProductVegetableoil">
+      <EntityTypeMapping TypeName="dbShoppingForumModel.tProductVegetableoil">
+        <MappingFragment StoreEntitySet="tProductVegetableoil">
+          <ScalarProperty Name="ffeatureID" ColumnName="ffeatureID" />
+          <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="tProdEfficacyRelation" TypeName="dbShoppingForumModel.tProdEfficacyRelation" StoreEntitySet="tProdEfficacyRelation">
+      <EndProperty Name="tProduct">
+        <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+      </EndProperty>
+      <EndProperty Name="tEfficacy">
+        <ScalarProperty Name="fEfficacyID" ColumnName="fEfficacyID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

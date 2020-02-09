@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbShoppingForumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tCategory">
+    <Key>
+      <PropertyRef Name="fCategoryID" />
+    </Key>
+    <Property Name="fCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fCategoryName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tEfficacy">
+    <Key>
+      <PropertyRef Name="fEfficacyID" />
+    </Key>
+    <Property Name="fEfficacyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fEfficacyName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tNote">
+    <Key>
+      <PropertyRef Name="fNoteID" />
+    </Key>
+    <Property Name="fNoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fNoteName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tPart">
+    <Key>
+      <PropertyRef Name="fPartID" />
+    </Key>
+    <Property Name="fPartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fPartName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tProdEfficacyRelation">
+    <Key>
+      <PropertyRef Name="fProductID" />
+      <PropertyRef Name="fEfficacyID" />
+    </Key>
+    <Property Name="fProductID" Type="int" Nullable="false" />
+    <Property Name="fEfficacyID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tProduct">
+    <Key>
+      <PropertyRef Name="fProductID" />
+    </Key>
+    <Property Name="fProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fProductChName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fProductDesc" Type="nvarchar(max)" />
+    <Property Name="fUnitPrice" Type="int" />
+    <Property Name="fQuantityPerUnit" Type="nvarchar" MaxLength="50" />
+    <Property Name="fUnitsInStock" Type="int" />
+    <Property Name="fUnitsOnOrder" Type="int" />
+    <Property Name="fReorderLevel" Type="int" />
+    <Property Name="fDiscontinued" Type="bit" />
+    <Property Name="fPartID" Type="int" Nullable="false" />
+    <Property Name="fNoteID" Type="int" Nullable="false" />
+    <Property Name="fCategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tProductImage">
+    <Key>
+      <PropertyRef Name="fProductID" />
+      <PropertyRef Name="fProductImageId" />
+    </Key>
+    <Property Name="fProductID" Type="int" Nullable="false" />
+    <Property Name="fProductImageId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fProductImagePath" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tProdEfficacyRelation_tEffcacy">
+    <End Role="tEfficacy" Type="Self.tEfficacy" Multiplicity="1" />
+    <End Role="tProdEfficacyRelation" Type="Self.tProdEfficacyRelation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tEfficacy">
+        <PropertyRef Name="fEfficacyID" />
+      </Principal>
+      <Dependent Role="tProdEfficacyRelation">
+        <PropertyRef Name="fEfficacyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProdEfficacyRelation_tProduct">
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+    <End Role="tProdEfficacyRelation" Type="Self.tProdEfficacyRelation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProduct">
+        <PropertyRef Name="fProductID" />
+      </Principal>
+      <Dependent Role="tProdEfficacyRelation">
+        <PropertyRef Name="fProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProduct_tCategory">
+    <End Role="tCategory" Type="Self.tCategory" Multiplicity="1" />
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tCategory">
+        <PropertyRef Name="fCategoryID" />
+      </Principal>
+      <Dependent Role="tProduct">
+        <PropertyRef Name="fCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProduct_tNote">
+    <End Role="tNote" Type="Self.tNote" Multiplicity="1" />
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tNote">
+        <PropertyRef Name="fNoteID" />
+      </Principal>
+      <Dependent Role="tProduct">
+        <PropertyRef Name="fNoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProduct_tPart">
+    <End Role="tPart" Type="Self.tPart" Multiplicity="1" />
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tPart">
+        <PropertyRef Name="fPartID" />
+      </Principal>
+      <Dependent Role="tProduct">
+        <PropertyRef Name="fPartID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProductImage_tProduct">
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+    <End Role="tProductImage" Type="Self.tProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProduct">
+        <PropertyRef Name="fProductID" />
+      </Principal>
+      <Dependent Role="tProductImage">
+        <PropertyRef Name="fProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbShoppingForumModelStoreContainer">
+    <EntitySet Name="tCategory" EntityType="Self.tCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tEfficacy" EntityType="Self.tEfficacy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tNote" EntityType="Self.tNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tPart" EntityType="Self.tPart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tProdEfficacyRelation" EntityType="Self.tProdEfficacyRelation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tProduct" EntityType="Self.tProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tProductImage" EntityType="Self.tProductImage" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tProdEfficacyRelation_tEffcacy" Association="Self.FK_tProdEfficacyRelation_tEffcacy">
+      <End Role="tEfficacy" EntitySet="tEfficacy" />
+      <End Role="tProdEfficacyRelation" EntitySet="tProdEfficacyRelation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProdEfficacyRelation_tProduct" Association="Self.FK_tProdEfficacyRelation_tProduct">
+      <End Role="tProduct" EntitySet="tProduct" />
+      <End Role="tProdEfficacyRelation" EntitySet="tProdEfficacyRelation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProduct_tCategory" Association="Self.FK_tProduct_tCategory">
+      <End Role="tCategory" EntitySet="tCategory" />
+      <End Role="tProduct" EntitySet="tProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProduct_tNote" Association="Self.FK_tProduct_tNote">
+      <End Role="tNote" EntitySet="tNote" />
+      <End Role="tProduct" EntitySet="tProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProduct_tPart" Association="Self.FK_tProduct_tPart">
+      <End Role="tPart" EntitySet="tPart" />
+      <End Role="tProduct" EntitySet="tProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProductImage_tProduct" Association="Self.FK_tProductImage_tProduct">
+      <End Role="tProduct" EntitySet="tProduct" />
+      <End Role="tProductImage" EntitySet="tProductImage" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

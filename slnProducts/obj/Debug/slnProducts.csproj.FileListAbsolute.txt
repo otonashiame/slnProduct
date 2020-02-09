@@ -253,3 +253,6 @@ D:\程式\期末專題\期末專題\sln\slnProducts\slnProducts\obj\Debug\slnPro
 D:\程式\期末專題\期末專題\sln\slnProducts\slnProducts\obj\Debug\slnProducts.csproj.CopyComplete
 D:\程式\期末專題\期末專題\sln\slnProducts\slnProducts\obj\Debug\slnProducts.dll
 D:\程式\期末專題\期末專題\sln\slnProducts\slnProducts\obj\Debug\slnProducts.pdb
+C:\Users\anm82\OneDrive\Documents\GitHub\slnProduct\slnProducts\obj\Debug\slnProducts.csprojAssemblyReference.cache
+C:\Users\anm82\OneDrive\Documents\GitHub\slnProduct\slnProducts\obj\Debug\slnProducts.dll
+C:\Users\anm82\OneDrive\Documents\GitHub\slnProduct\slnProducts\obj\Debug\slnProducts.pdb

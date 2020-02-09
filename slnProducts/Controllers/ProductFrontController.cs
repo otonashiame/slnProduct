@@ -16,6 +16,6 @@ namespace slnProducts.Controllers
         public ActionResult ProductPage()
         {
             return View();
-        }
+        }//gagagaag
     }
 }

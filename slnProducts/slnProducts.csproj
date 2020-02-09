@@ -261,6 +261,7 @@
     <Compile Include="Models\Product\tProductUnilateralPartial.cs" />
     <Compile Include="Models\Product\tProductVegetableoilPartial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ProductLists.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -277,10 +278,13 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Product\ProductPage.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Product\ProductCreate.cshtml" />
     <Content Include="Views\Product\ProductEdit.cshtml" />
+    <Content Include="Views\Product\ProductPage.cshtml" />
+    <Content Include="Views\ProductFront\ProductFrontPage.cshtml" />
+    <Content Include="Views\ProductFront\ProductSinglePage.cshtml" />
+    <Content Include="Views\ProductFront\ProductMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -290,7 +294,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ProductFront\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

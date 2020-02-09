@@ -1,0 +1,70 @@
+﻿@model slnProducts.ViewModel.ProductMenu
+<div>
+    <ul>
+        <a>依功效分</a>
+        @foreach (var Efficacy in Model.EfficacyList)
+        {
+            <li><a href="../../ProductFront/ProductFrontPage?">
+                @Html.ActionLink(Efficacy.fEfficacyName, "ProductFrontPage")
+            </a></li>
+        }
+
+        @*<a href="../../ProductFront/ProductSinglePage?productId=@item.fProductID">
+            @item.fProductChName
+        </a>*@
+    </ul>
+    <ul>
+        <a>依香味調性分</a>
+        @foreach (var note in Model.NoteList)
+        {
+            <li>@Html.ActionLink(note.fNoteName, "ProductFrontPage")</li>
+        }
+    </ul>
+
+    @foreach (var item in Model.CategoryList)
+    {
+        <p>
+            @Html.ActionLink(item.fCategoryName, "ProductFrontPage")
+        </p>
+
+
+        // 單方精油
+        if (item.fCategoryID == 1)
+        {
+            <ul>
+                @foreach (var part in Model.PartList)
+                {
+                    <li>
+                        @Html.ActionLink(part.fPartName, "ProductFrontPage", new { categoryId = item.fCategoryID })
+                    </li>
+                }
+            </ul>
+        }
+        if (item.fCategoryID == 2)
+        {
+            <ul>
+                @foreach (var efficacy in Model.EfficacyList.Take(5))
+                {
+                    <li>
+                        @Html.ActionLink(efficacy.fEfficacyName, "ProductFrontPage")
+                    </li>
+                }
+            </ul>
+        }
+        if (item.fCategoryID == 3 || item.fCategoryID == 4)
+        {
+            <ul>
+                @foreach (var feature in Model.FeatureList)
+                {
+                    <li>
+                        @Html.ActionLink(feature.ffeatureName, "ProductFrontPage")
+                    </li>
+                }
+            </ul>
+        }
+    }
+    <div>
+
+    </div>
+</div>
+

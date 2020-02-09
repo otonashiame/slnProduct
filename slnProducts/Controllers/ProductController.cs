@@ -11,7 +11,7 @@ namespace slnProducts.Controllers
 {
     public class ProductController : Controller
     {
-        
+        dbShoppingForumEntities db = new dbShoppingForumEntities();
         DropDownList DropDownList = new DropDownList();
         object lockObject = new object();
         int pagesize = 10;
@@ -23,7 +23,7 @@ namespace slnProducts.Controllers
 
             var products = db.tProduct.ToList();
             var pageresult = products.ToPagedList(currentPage, pagesize);
-            return View("ProductPage", pageresult);
+            return View(pageresult);
         }
 
         //新增商品

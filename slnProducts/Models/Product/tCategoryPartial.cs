@@ -12,7 +12,6 @@ namespace slnProducts.Models.Entity
     {
         public class tCategoryMetadata
         {
-          
             [DisplayName("商品分類編號")]
             public int fCategoryID { get; set; }
 

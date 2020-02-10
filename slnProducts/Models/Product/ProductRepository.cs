@@ -14,7 +14,7 @@ namespace slnProducts.Models.Product
         {
             var products = db.tProduct.AsQueryable();
 
-            //搜尋商品名稱
+            //搜尋商品名稱(糢糊搜尋)
             if (searchprod != null)
             {
                 products = products.Where(p => p.fProductChName.Contains(searchprod));

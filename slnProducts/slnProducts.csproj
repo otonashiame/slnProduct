@@ -286,7 +286,7 @@
     <Content Include="Views\Product\ProductPage.cshtml" />
     <Content Include="Views\ProductFront\ProductFrontPage.cshtml" />
     <Content Include="Views\ProductFront\ProductSinglePage.cshtml" />
-    <Content Include="Views\ProductFront\ProductMenu.cshtml" />
+    <Content Include="Views\ProductFront\_Product_Menu.cshtml" />
     <Content Include="Views\ProductFront\_List_Product.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

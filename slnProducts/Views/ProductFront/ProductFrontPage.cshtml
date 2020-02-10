@@ -7,36 +7,35 @@
 @{
     ViewBag.Title = "ProductFrontPage";
 }
+
+@*商品搜尋--依據商品名稱*@
+
+@Html.Label("搜尋名稱")
+@Html.TextBox("searchprod", "", new { @class = "form-control" })
+<input class="btn btn-primary" value="Search" type="button" onclick="searchProd()" />
+
 @Html.Partial("ProductMenu", (slnProducts.ViewModel.ProductMenu)ViewBag.productMenu)
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 
 <h2>商品列表</h2>
-<div class="row">
-    @foreach (var item in Model)
-    {
-        var imageScr = $"../../images/{item.fProductID}.jpg";
-
-        <div class="col-lg-4">
-            <div class="thumbnail">
-                <img src="@imageScr" style="width:30%" />
-                <div class="caption"></div>
-                <p>
-                    @Html.DisplayNameFor(m => m.FirstOrDefault().fProductChName)
-
-                    <a href="../../ProductFront/ProductSinglePage?productId=@item.fProductID">
-                        @item.fProductChName
-                    </a>
-
-                </p>
-                <p>@Html.DisplayNameFor(m => m.FirstOrDefault().fUnitPrice) @item.fUnitPrice</p>
-
-                @Html.ActionLink("加入購物車", "", new {prodID=item.fProductID},
-              new {@class = "btn btn-info" })
-
-            </div>
-        </div>
-    }
+<div class="row" id="productListShow">
+   @Html.Partial("_List_Product",Model)
 </div>
 @Html.PagedListPager(Model, page => Url.Action("ProductFrontPage", new { page }))
+<script>
+    function searchProd()
+    {
+        alert($("#searchprod").val());
+        window.open("/ProductFront/ProductFrontPage?searchprod=" + $("#searchprod").val(),"_self");
+        // 這個是AJAX 作法 但是雨樊等級不夠不能使用 GG
+        //$.get('/ProductFront/ProductFrontPage', {
+        //    searchprod: $("#searchprod").val()
+        //}, function (data) {
+        //    $("#productListShow").html(data);
+        //    alert($("#searchprod").val());
+        //} 
+        //)
+    }
+</script>
 
 

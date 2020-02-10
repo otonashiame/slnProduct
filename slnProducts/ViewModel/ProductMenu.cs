@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace slnProducts.ViewModel
 {
     public class ProductMenu
     {
+        public List<tProduct> ProductsList { get; set; }
         public List<tCategory> CategoryList { get; set; }
         public List<tEfficacy> EfficacyList { get; set; }
         public List<tPart> PartList { get; set; }
